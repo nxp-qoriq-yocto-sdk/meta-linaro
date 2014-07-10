@@ -72,6 +72,7 @@ do_install() {
 	fi
 	cp -a ${EXTERNAL_TOOLCHAIN}/${ELT_TARGET_SYS}/libc/usr/share/*  ${D}${datadir}
 	cp -a ${EXTERNAL_TOOLCHAIN}/${ELT_TARGET_SYS}/libc/usr/include/*  ${D}${includedir}
+	cp -a ${EXTERNAL_TOOLCHAIN}/${ELT_TARGET_SYS}/libc/usr/bin/mtrace  ${D}${bindir}
 	if [ -d ${EXTERNAL_TOOLCHAIN}/${ELT_TARGET_SYS}/libc/usr/include/${ELT_TARGET_SYS} ]; then
 		cp -a ${EXTERNAL_TOOLCHAIN}/${ELT_TARGET_SYS}/libc/usr/include/${ELT_TARGET_SYS}/*  ${D}${includedir}
 
@@ -155,6 +156,7 @@ INSANE_SKIP_gdbserver += "ldflags"
 PKG_${PN} = "eglibc"
 PKG_${PN}-dev = "eglibc-dev"
 PKG_${PN}-doc = "eglibc-doc"
+PKG_${PN}-mtrace = "eglibc-mtrace"
 PKG_${PN}-dbg = "eglibc-dbg"
 PKG_${PN}-pic = "eglibc-pic"
 PKG_${PN}-utils = "eglibc-utils"
@@ -163,6 +165,8 @@ PKG_${PN}-extra-nss = "eglibc-extra-nss"
 PKG_${PN}-thread-db = "eglibc-thread-db"
 PKG_${PN}-pcprofile = "eglibc-pcprofile"
 PKG_${PN}-staticdev = "eglibc-staticdev"
+
+RPROVIDES_${PN}-mtrace += "${TCLIBC}-mtrace"
 
 PKGV_${PN} = "${ELT_VER_LIBC}"
 PKGV_${PN}-dev = "${ELT_VER_LIBC}"
