@@ -145,7 +145,10 @@ PACKAGES =+ "\
 	libitm \
 	libitm-dev \
 	libitm-staticdev \
+	eglibc-utils \
 "
+
+ALLOW_EMPTY_eglibc-utils = "1"
 
 INSANE_SKIP_${PN}-dbg = "staticdev"
 INSANE_SKIP_${PN}-utils += "ldflags"
@@ -166,7 +169,12 @@ PKG_${PN}-thread-db = "eglibc-thread-db"
 PKG_${PN}-pcprofile = "eglibc-pcprofile"
 PKG_${PN}-staticdev = "eglibc-staticdev"
 
+RPROVIDES_${PN} += "${TCLIBC}"
 RPROVIDES_${PN}-mtrace += "${TCLIBC}-mtrace"
+RPROVIDES_${PN}-staticdev += "${TCLIBC}-staticdev"
+RPROVIDES_${PN}-dev += "${TCLIBC}-dev"
+RPROVIDES_${PN}-dbg += "${TCLIBC}-dbg"
+RPROVIDES_${PN}-utils += "${TCLIBC}-utils"
 
 PKGV_${PN} = "${ELT_VER_LIBC}"
 PKGV_${PN}-dev = "${ELT_VER_LIBC}"
