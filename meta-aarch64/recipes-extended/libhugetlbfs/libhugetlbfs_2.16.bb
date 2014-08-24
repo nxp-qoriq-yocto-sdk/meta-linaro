@@ -10,7 +10,7 @@ LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
 SRCREV = "${AUTOREV}"
-PV = "2.16+git${SRCPV}"
+PV = "2.16+git"
 PR = "r1"
 
 SRC_URI = "git://git.linaro.org/people/stevecapper/libhugetlbfs.git;protocol=http;branch=aarch64-support \
