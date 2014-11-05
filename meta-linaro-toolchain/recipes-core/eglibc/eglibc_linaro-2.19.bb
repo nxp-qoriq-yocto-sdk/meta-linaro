@@ -6,7 +6,7 @@ MMYY = "14.04"
 RELEASE = "20${MMYY}"
 PR = "r${RELEASE}"
 
-SRC_URI = "http://cbuild.validation.linaro.org/snapshots/eglibc-${PV}-${RELEASE}.tar.bz2 \
+SRC_URI = "https://snapshots.linaro.org/openembedded/sources/eglibc-${PV}-${RELEASE}.tar.bz2 \
            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
            file://IO-acquire-lock-fix.patch \
            file://mips-rld-map-check.patch \
