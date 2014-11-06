@@ -80,7 +80,7 @@ do_install() {
 	fi
 
 	# fix up the copied symlinks (they are still pointing to the multiarch directory)
-	linker_name="${@base_contains("TUNE_FEATURES", "aarch64", "ld-linux-aarch64.so.1", "ld-linux.so.3",d)}"
+	linker_name="${@base_contains("TUNE_FEATURES", "aarch64", "ld-linux-aarch64.so.1", base_contains("TUNE_FEATURES", "callconvention-hard", "ld-linux-armhf.so.3", "ld-linux.so.3",d), d)}"
 	ln -sf ld-${ELT_VER_LIBC}.so ${D}${base_libdir}/${linker_name}
 	ln -sf ../../lib/libnsl.so.1 ${D}${libdir}/libnsl.so
 	ln -sf ../../lib/librt.so.1 ${D}${libdir}/librt.so
@@ -109,10 +109,12 @@ do_install() {
 	fi
 
 	if [ -f ${D}${libdir}/libc.so ];then
-		sed -i -e "s# /lib/${ELT_TARGET_SYS}# ../../lib#g" -e "s# /usr/lib/${ELT_TARGET_SYS}# .#g" ${D}${libdir}/libc.so
+		#sed -i -e "s# /lib/${ELT_TARGET_SYS}# ../../lib#g" -e "s# /usr/lib/${ELT_TARGET_SYS}# .#g" ${D}${libdir}/libc.so
+        sed -i -e "s# /lib/${ELT_TARGET_SYS}# ../../lib#g" -e "s# /usr/lib/${ELT_TARGET_SYS}# .#g" -e "s# /lib/ld-linux# ../../lib/ld-linux#g" ${D}${libdir}/libc.so
 	fi
 	if [ -f ${D}${base_libdir}/libc.so ];then
-		sed -i -e "s# /lib/${ELT_TARGET_SYS}# ../../lib#g" -e "s# /usr/lib/${ELT_TARGET_SYS}# .#g" ${D}${base_libdir}/libc.so
+		#sed -i -e "s# /lib/${ELT_TARGET_SYS}# ../../lib#g" -e "s# /usr/lib/${ELT_TARGET_SYS}# .#g" ${D}${base_libdir}/libc.so
+        sed -i -e "s# /lib/${ELT_TARGET_SYS}# ../../lib#g" -e "s# /usr/lib/${ELT_TARGET_SYS}# .#g" -e "s# /lib/ld-linux# ../../lib/ld-linux#g" ${D}${base_libdir}/libc.so
 	fi
 	if [ -f ${D}${libdir}/libpthread.so ];then
 		sed -i -e "s# /lib/${ELT_TARGET_SYS}# ../../lib#g" -e "s# /usr/lib/${ELT_TARGET_SYS}# .#g" ${D}${libdir}/libpthread.so
@@ -301,7 +303,8 @@ FILES_libgfortran-staticdev = " \
 
 FILES_libmudflap = "${base_libdir}/libmudflap*.so.*"
 FILES_libmudflap-dev = "\
-  ${base_libdir}/libmudflap*.so \
+  ${base_libdir}/libmudflap*.so "
+FILES_libmudflap-staticdev = "\
   ${base_libdir}/libmudflap*.a \
   ${base_libdir}/libmudflap*.la"
 
