@@ -149,9 +149,12 @@ PACKAGES =+ "\
 	libitm-dev \
 	libitm-staticdev \
 	eglibc-utils \
+        eglibc \
+        eglibc-dev \
 "
 
 ALLOW_EMPTY_eglibc-utils = "1"
+ALLOW_EMPTY_eglibc-dev = "1"
 
 INSANE_SKIP_${PN}-dbg = "staticdev"
 INSANE_SKIP_${PN}-utils += "ldflags"
