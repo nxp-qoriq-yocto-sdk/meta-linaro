@@ -38,6 +38,9 @@ PROVIDES += "\
 	libgomp \
 	libgomp-dev \
 	libgomp-staticdev \
+        libgcov \
+        libgcov-dev \
+        libgcov-staticdev \
 	libitm \
 	libitm-dev \
 	libitm-staticdev \
@@ -145,6 +148,9 @@ PACKAGES =+ "\
 	libgomp \
 	libgomp-dev \
 	libgomp-staticdev \
+        libgcov \
+        libgcov-dev \
+        libgcov-staticdev \
 	libitm \
 	libitm-dev \
 	libitm-staticdev \
@@ -155,6 +161,7 @@ PACKAGES =+ "\
 
 ALLOW_EMPTY_eglibc-utils = "1"
 ALLOW_EMPTY_eglibc-dev = "1"
+ALLOW_EMPTY_libgcov-dev = "1"
 
 INSANE_SKIP_${PN}-dbg = "staticdev"
 INSANE_SKIP_${PN}-utils += "ldflags"
@@ -332,6 +339,17 @@ FILES_libgomp-dev = "\
 FILES_libgomp-staticdev = "\
   ${base_libdir}/libgomp*.a \
   "
+
+FILES_libgcov = "${base_libdir}/libgcov.so.*"
+FILES_libgcov-dev = " \
+  ${base_libdir}/libgcov*.so \
+  ${base_libdir}/libgcov*.la \
+"
+FILES_libgcov-staticdev = " \
+  ${base_libdir}/libgcov*.a \
+"
+
+
 ELT_VER_MAIN ??= ""
 
 python () {
